@@ -1,418 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learn With KASTRO - Jenkins Docker Kubernetes Training</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CloudDevOpsHub</title>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #ffffff;
-        }
+<style>
+:root{
+  --primary:#0f766e;     /* Teal */
+  --secondary:#22c55e;   /* Emerald */
+  --dark:#022c22;
+  --bg:#ecfeff;
+  --card:#ffffff;
+  --text:#022c22;
+  --muted:#475569;
+}
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+*{margin:0;padding:0;box-sizing:border-box}
 
-        /* Navigation */
-        .navbar {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
-        }
+body{
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:linear-gradient(180deg,#ecfeff,#f8fafc);
+  color:var(--text);
+  line-height:1.7;
+}
 
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+.container{
+  max-width:1200px;
+  margin:auto;
+  padding:0 20px;
+}
 
-        .nav-logo h2 {
-            color: white;
-            font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
+/* NAVBAR */
+.navbar{
+  position:fixed;
+  top:0;
+  width:100%;
+  background:linear-gradient(135deg,var(--dark),var(--primary));
+  padding:14px 0;
+  z-index:1000;
+  box-shadow:0 6px 18px rgba(0,0,0,0.15);
+}
 
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
+.nav-container{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
 
-        .nav-link {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
+.nav-logo{
+  font-size:1.55rem;
+  font-weight:900;
+  color:#ecfeff;
+  letter-spacing:0.5px;
+}
 
-        .nav-link:hover,
-        .nav-link.active {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
+.nav-menu{
+  display:flex;
+  list-style:none;
+  gap:26px;
+}
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            padding: 120px 0 80px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-            min-height: 100vh;
-        }
+.nav-link{
+  text-decoration:none;
+  color:#d1fae5;
+  font-weight:600;
+}
 
-        .hero-content h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: #1e293b;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
+.nav-link:hover,
+.nav-link.active{
+  color:#ffffff;
+}
 
-        .hero-content h1 span {
-            color: #2563eb;
-            display: block;
-            font-size: 3rem;
-        }
+/* HERO */
+.hero{
+  padding:150px 0 100px;
+  text-align:center;
+}
 
-        .hero-content p {
-            font-size: 1.25rem;
-            color: #64748b;
-            margin-bottom: 2.5rem;
-            line-height: 1.7;
-        }
+.hero h1{
+  font-size:3.2rem;
+  font-weight:900;
+  margin-bottom:20px;
+}
 
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
+.hero h1 span{
+  color:var(--primary);
+}
 
-        .btn {
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 1.1rem;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            text-align: center;
-            min-width: 180px;
-        }
+.hero p{
+  max-width:900px;
+  margin:0 auto 22px;
+  color:var(--muted);
+  font-size:1.12rem;
+}
 
-        .btn-primary {
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            color: white;
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
-        }
+.hero strong{
+  color:var(--primary);
+  font-weight:700;
+}
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.4);
-        }
+/* CTA BUTTONS */
+.hero-buttons{
+  margin-top:40px;
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  flex-wrap:wrap;
+}
 
-        .btn-secondary {
-            background: transparent;
-            color: #2563eb;
-            border: 2px solid #2563eb;
-        }
+.btn{
+  padding:15px 34px;
+  border-radius:32px;
+  text-decoration:none;
+  font-weight:800;
+  letter-spacing:0.4px;
+}
 
-        .btn-secondary:hover {
-            background: #2563eb;
-            color: white;
-            transform: translateY(-3px);
-        }
+.btn-primary{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:white;
+  box-shadow:0 10px 25px rgba(34,197,94,0.35);
+}
 
-        .hero-image {
-            position: relative;
-        }
+.btn-outline{
+  border:2px solid var(--primary);
+  color:var(--primary);
+  background:white;
+}
 
-        .hero-image::before {
-            content: '';
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            right: 20px;
-            bottom: 20px;
-            background: linear-gradient(135deg, #2563eb 0%, #0d9488 100%);
-            border-radius: 20px;
-            z-index: -1;
-            opacity: 0.1;
-        }
+/* TRAINER SECTION */
+.trainer{
+  background:var(--card);
+  padding:90px 0;
+}
 
-        .hero-image img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
+.trainer h2{
+  text-align:center;
+  font-size:2.5rem;
+  margin-bottom:30px;
+}
 
-        /* Features Section */
-        .features {
-            padding: 100px 0;
-            background: #ffffff;
-        }
+.trainer-content{
+  max-width:920px;
+  margin:auto;
+  text-align:center;
+}
 
-        .features h2 {
-            text-align: center;
-            font-size: 3rem;
-            font-weight: 800;
-            color: #1e293b;
-            margin-bottom: 1rem;
-        }
+.trainer-content p{
+  color:var(--muted);
+  margin-bottom:16px;
+  font-size:1.05rem;
+}
 
-        .features-subtitle {
-            text-align: center;
-            font-size: 1.2rem;
-            color: #64748b;
-            margin-bottom: 4rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+/* BADGES */
+.badges{
+  display:flex;
+  justify-content:center;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-top:30px;
+}
 
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-            margin-top: 4rem;
-        }
+.badge{
+  background:linear-gradient(135deg,#ecfeff,#f0fdfa);
+  padding:12px 22px;
+  border-radius:24px;
+  font-weight:700;
+  color:var(--primary);
+  border:1px solid #99f6e4;
+  box-shadow:0 6px 16px rgba(0,0,0,0.05);
+}
 
-        .feature-card {
-            background: white;
-            border-radius: 20px;
-            padding: 2.5rem;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            border: 1px solid #f1f5f9;
-            position: relative;
-            overflow: hidden;
-        }
+/* FOOTER */
+.footer{
+  background:linear-gradient(135deg,var(--dark),#064e3b);
+  color:#d1fae5;
+  text-align:center;
+  padding:45px 0;
+  font-weight:600;
+}
 
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #2563eb, #0d9488, #ea580c);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
-
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1.5rem;
-            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-        }
-
-        .feature-card:nth-child(2) .feature-icon {
-            background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
-        }
-
-        .feature-card:nth-child(3) .feature-icon {
-            background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
-        }
-
-        .feature-card h3 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card p {
-            color: #64748b;
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .card-link {
-            color: #2563eb;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-        }
-
-        .card-link:hover {
-            color: #1d4ed8;
-            text-decoration: underline;
-        }
-
-        /* Footer */
-        .footer {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            color: white;
-            text-align: center;
-            padding: 3rem 0;
-        }
-
-        .footer p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-
-            .hero {
-                grid-template-columns: 1fr;
-                padding: 100px 0 60px;
-                text-align: center;
-            }
-
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero-content h1 span {
-                font-size: 2.2rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .btn {
-                min-width: 150px;
-                padding: 0.875rem 1.5rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-
-            .hero-content h1 span {
-                font-size: 1.8rem;
-            }
-
-            .features h2 {
-                font-size: 2.5rem;
-            }
-
-            .feature-card {
-                padding: 2rem;
-            }
-        }
-    </style>
+/* MOBILE */
+@media(max-width:768px){
+  .nav-menu{display:none}
+  .hero h1{font-size:2.3rem}
+}
+</style>
 </head>
+
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <h2>Learn With KASTRO</h2>
-            </div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="/" class="nav-link active">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/about" class="nav-link">About</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/courses" class="nav-link">Modules</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/contact" class="nav-link">Contact</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
 
-    <header class="hero">
-        <div class="hero-content">
-            <h1>Welcome to <span>Jenkins + Docker + Kubernetes + Terraform Training</span></h1>
-            <p>Master DevOps with comprehensive hands-on training. Build your career with industry-relevant skills, real-world projects, and expert guidance in the most demanding technologies.</p>
-            <div class="hero-buttons">
-                <a href="/courses" class="btn btn-primary">Explore the Course</a>
-                <a href="/contact" class="btn btn-secondary">Get Started</a>
-            </div>
-        </div>
-        <div class="hero-image">
-            <img src="https://www.aukfood.fr/wp-content/uploads/2021/02/Docker-vs-Kubernetes-1024x616-1.png" alt="DevOps Training">
-        </div>
-    </header>
+<nav class="navbar">
+  <div class="container nav-container">
+    <div class="nav-logo">CloudDevOpsHub</div>
+    <ul class="nav-menu">
+      <li><a href="/" class="nav-link active">Home</a></li>
+      <li><a href="/about" class="nav-link">About us</a></li>
+      <li><a href="/courses" class="nav-link">Our course</a></li>
+      <li><a href="/contact" class="nav-link">Contact us</a></li>
+    </ul>
+  </div>
+</nav>
 
-    <section class="features">
-        <div class="container">
-            <h2>Why Choose Our Training?</h2>
-            <p class="features-subtitle">Experience world-class DevOps training with practical, hands-on learning approach</p>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        📹
-                    </div>
-                    <h3>Live Sessions</h3>
-                    <p>Interactive live training sessions with real-time Q&A, hands-on demonstrations, and personalized guidance from industry experts.</p>
-                    
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        🎯
-                    </div>
-                    <h3>Scenario Based Learning</h3>
-                    <p>Learn through real-world scenarios and practical use cases that mirror actual industry challenges and requirements.</p>
-                    
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        📁
-                    </div>
-                    <h3>10+ Real Time Projects</h3>
-                    <p>Hands-on experience with over 10 real-time projects covering CI/CD pipelines, containerization, and orchestration.</p>
-                    
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="hero container">
+  <h1>India’s Leading <span>Cloud & DevOps Community</span></h1>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Learn With KASTRO. All rights reserved.</p>
-        </div>
-    </footer>
+  <p>
+    Welcome to <strong>CloudDevOpsHub</strong> — a trusted learning ecosystem empowering
+    Cloud & DevOps Engineers to become <strong>JOB-READY from Day 1</strong>.
+  </p>
+
+  <p>
+    Since <strong>2012</strong>, we have completed <strong>38+ batches</strong> and trained
+    <strong>7,000+ professionals globally</strong> across AWS, Azure & Google Cloud.
+  </p>
+
+  <p>
+    Transform into a <strong>Multi-Cloud + DevOps with AI Engineer</strong> in just
+    <strong>3 months</strong>, mastering real-world tools used by top MNCs.
+  </p>
+
+  <div class="hero-buttons">
+    <a href="/contact" class="btn btn-primary">Join the Community</a>
+    <a href="/courses" class="btn btn-outline">Explore Curriculum</a>
+  </div>
+</section>
+
+<section class="trainer">
+  <div class="container trainer-content">
+    <h2>Trainer & Mentor – Vikas</h2>
+
+    <p>
+      <strong>Vikas</strong> is an Entrepreneur, Corporate Trainer & DevOps Mentor
+      with <strong>14+ years</strong> of real-time industry experience.
+    </p>
+
+    <p>
+      Worked with <strong>PWC, Microsoft & General Electric</strong> and holds
+      <strong>AWS (3×), Google Cloud Architect & CKAD</strong> certifications.
+    </p>
+
+    <p>
+      Delivered <strong>100+ POCs</strong> and helped thousands of learners
+      secure high-growth Cloud & DevOps roles worldwide.
+    </p>
+
+    <div class="badges">
+      <div class="badge">14+ Years Experience</div>
+      <div class="badge">Multi-Cloud Specialist</div>
+      <div class="badge">DevOps with AI</div>
+      <div class="badge">7000+ Students</div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2026 CloudDevOpsHub</p>
+  </div>
+</footer>
+
 </body>
 </html>
