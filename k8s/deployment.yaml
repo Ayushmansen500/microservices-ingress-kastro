@@ -17,7 +17,8 @@ spec:
     spec:
       containers:
       - name: techsolutions
-        image: kastrov/techsolutions-app:latest
+        image: ayushman50/techsolutions-app:latest   # ✅ FIXED
+        imagePullPolicy: Always                      # ✅ VERY IMPORTANT
         ports:
         - containerPort: 80
         resources:
